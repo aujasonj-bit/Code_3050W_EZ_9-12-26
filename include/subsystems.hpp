@@ -2,6 +2,7 @@
 
 #include "EZ-Template/api.hpp"
 #include "api.h"
+#include "subsystems.cpp"
 
 extern Drive chassis;
 
@@ -19,4 +20,4 @@ extern pros::ADIDigitalOut clamp;
 //prototype functions here
 
 
-extern void opcontrol_hdrive();
+void opcontrol_hdrive();

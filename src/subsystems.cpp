@@ -14,6 +14,7 @@ inline pros::ADIDigitalOut clamp('A');
 
 
 //all subsystem functions defined here (could do this in main.cpp but putting them here is better for organisation)
+
 void opcontrol_hdrive(){
     while (true) {
         int speed = controller.get_analog(pros::controller_analog_e_t::E_CONTROLLER_ANALOG_LEFT_X);
