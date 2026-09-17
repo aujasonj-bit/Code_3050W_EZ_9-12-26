@@ -17,8 +17,8 @@ ez::Drive chassis(
 
 // odom pods
 //(port, wheel diameter, distance from center of robot to center of wheel)
-ez::tracking_wheel horiz_tracker(8, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(8, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(9, 2, 4.0);   // This tracking wheel is parallel to the drive wheels
 
 
 
