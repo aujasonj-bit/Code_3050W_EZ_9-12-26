@@ -376,3 +376,51 @@ void measure_offsets() {
 // . . .
 // Make your own autonomous functions here!
 // . . .
+
+void auto_loaderside_backwall() {
+
+  //toggle x2
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  //score preload
+  chassis.pid_odom_set({{{0_in, -60_in}, fwd, DRIVE_SPEED},
+                        {{12_in, -48_in}, fwd, DRIVE_SPEED},
+                        {{15_in, -48_in}, fwd, DRIVE_SPEED}},
+                       true);
+  chassis.pid_wait();
+
+  claw.set_value(false);
+
+  //collect stack 1
+  chassis.pid_odom_set(12_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(150_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-21_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  claw.set_value(true);
+  
+  //drive to opposite goal
+  chassis.pid_odom_set(21_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+}
+
+
+

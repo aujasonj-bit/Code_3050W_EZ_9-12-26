@@ -10,7 +10,7 @@ pros::Motor intake(18, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUn
 pros::Motor lift1(17, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
 pros::Motor lift2(-16, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
 
-inline pros::ADIDigitalOut clamp('A');
+pros::ADIDigitalOut claw('A');
 
 
 //all subsystem functions defined here (could do this in main.cpp but putting them here is better for organisation)
@@ -22,3 +22,4 @@ void opcontrol_hdrive(){
         hpod2.move(speed);
     }
 }
+
