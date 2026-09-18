@@ -4,11 +4,11 @@
 //define devices
 // pros::Controller controller(pros::controller_id_e_t::E_CONTROLLER_MASTER);
 
-pros::Motor hpod1(20, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
-pros::Motor hpod2(-19, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
-pros::Motor intake(18, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
-pros::Motor lift1(17, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
-pros::Motor lift2(-16, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
+pros::Motor hpod1(4, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
+pros::Motor hpod2(-5, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
+pros::Motor intake(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
+pros::Motor lift1(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
+pros::Motor lift2(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
 
 pros::ADIDigitalOut claw('A');
 
