@@ -227,17 +227,6 @@ void ez_template_extras() {
 }
 
 
-void hdrive_thread(void* param) {
-  while (true) {
-
-
-        opcontrol_hdrive();
-        pros::delay(20); 
-      
-  }      
-}
-
-
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -255,9 +244,6 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_BRAKE);
 
-    pros::Task hdrive_task(hdrive_thread, (void*)"PROS");
-        printf("%d\n", hdrive_task.get_state());
-
   while (true) {
 
     // Gives you some extras to make EZ-Template ezier
@@ -274,7 +260,30 @@ void opcontrol() {
     // . . .
 
 
-    // hdrive pod code (uses threads to run in background so both arcade drive and hdrive functions run a the same time)
+    // hdrive self test: press UP to scan all 21 smart ports and spin every motor found
+    // - PROP THE ROBOT UP first: this spins ALL motors it finds, drive motors included
+    // - watch the wheels: note WHICH port number makes the middle wheel spin
+    // - watch the PROS terminal: it prints what device is on every port
+    if (master.get_digital_new_press(DIGITAL_UP)) {
+      printf("hdrive self test!\n");
+      for (int p = 1; p <= 21; p++) {
+        pros::c::v5_device_e_t type = pros::c::get_plugged_type(p);
+        printf("port %d: type %d\n", p, (int)type);
+        if (type == pros::c::E_DEVICE_MOTOR) {
+          printf("  -> spinning motor on port %d\n", p);
+          pros::Motor test_motor(p);
+          test_motor.move(127);
+          pros::delay(300);
+          printf("  -> velocity: %d\n", (int)test_motor.get_actual_velocity());
+          test_motor.move(0);
+          pros::delay(150);
+        }
+      }
+      printf("hdrive self test done!\n");
+    }
+
+    // hdrive pods: strafes with the left stick's x-axis, runs alongside arcade drive
+    opcontrol_hdrive();
     
     
 

@@ -6,7 +6,6 @@
 extern Drive chassis;
 
 // declare devices
-extern pros::Controller controller();
 
 extern pros::Motor hpod1;
 extern pros::Motor hpod2;
