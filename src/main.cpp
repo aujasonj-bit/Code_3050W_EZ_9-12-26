@@ -226,6 +226,18 @@ void ez_template_extras() {
   }
 }
 
+
+void hdrive_thread(void* param) {
+  while (true) {
+
+
+        opcontrol_hdrive();
+        pros::delay(20); 
+      
+  }      
+}
+
+
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -243,9 +255,13 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_BRAKE);
 
+    pros::Task hdrive_task(hdrive_thread, (void*)"PROS");
+        printf("%d\n", hdrive_task.get_state());
+
   while (true) {
+
     // Gives you some extras to make EZ-Template ezier
-    ez_template_extras();
+    // ez_template_extras();
 
     // chassis.opcontrol_tank();  // Tank control
     chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
@@ -256,7 +272,13 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
-    opcontrol_hdrive();
+
+
+    // hdrive pod code (uses threads to run in background so both arcade drive and hdrive functions run a the same time)
+    
+    
+
+    // pros::screen::print(TEXT_MEDIUM, 1, "test");
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
