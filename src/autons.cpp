@@ -511,5 +511,36 @@ void auto_blankside_backwall() {
 
 }
 
+void auto_loaderside_middle() {
 
+  //toggle x2
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
 
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  //score preload
+  chassis.pid_odom_set({{{0_in, -60_in}, fwd, DRIVE_SPEED},
+                        {{12_in, -48_in}, fwd, DRIVE_SPEED},
+                        {{15_in, -48_in}, fwd, DRIVE_SPEED}},
+                       true);
+  chassis.pid_wait();
+
+  //collect stack 1
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(-150_deg, TURN_SPEED);
+  chassis.pid_wait();
+  
+  chassis.pid_odom_set(-18_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+  
+  }
