@@ -7,8 +7,6 @@ extern Drive chassis;
 
 // declare devices
 
-extern pros::Motor hpod1;
-extern pros::Motor hpod2;
 extern pros::Motor intake;
 extern pros::Motor lift1;
 extern pros::Motor lift2;
