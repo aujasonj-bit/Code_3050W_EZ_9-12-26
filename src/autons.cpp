@@ -377,6 +377,12 @@ void measure_offsets() {
 // Make your own autonomous functions here!
 // . . .
 
+//Drive commands assume drivebase is 18 inches wide
+//auton reset in main.cpp places robot position in center of robot (auton code accounts for this - e.g. when driving to score in alliance goal the actual coordinates given are 9 inches away from the actual goal)
+//Auton functions currently don't have anything except drive commands
+//Drive commands don't currently account for goal width, only robot width
+
+
 void auto_loaderside_backwall() {
 
   //toggle x2
@@ -399,28 +405,109 @@ void auto_loaderside_backwall() {
                        true);
   chassis.pid_wait();
 
-  claw.set_value(false);
+  //collect stack 1
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(-30_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-18_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+  
+  //drive to opposite goal and score stack
+  chassis.pid_odom_set(18_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-27_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  //collect stack 2
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(30_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-18_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  //score stack 2
+  chassis.pid_odom_set(18_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+}
+
+void auto_blankside_backwall() {
+
+  //toggle x2
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  //score preload
+  chassis.pid_odom_set({{{0_in, -60_in}, fwd, DRIVE_SPEED},
+                        {{-12_in, -48_in}, fwd, DRIVE_SPEED},
+                        {{-15_in, -48_in}, fwd, DRIVE_SPEED}},
+                       true);
+  chassis.pid_wait();
 
   //collect stack 1
-  chassis.pid_odom_set(12_in, DRIVE_SPEED, true);
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
   chassis.pid_wait();
 
-  chassis.pid_turn_set(150_deg, TURN_SPEED);
+  chassis.pid_turn_set(30_deg, TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_odom_set(-21_in, DRIVE_SPEED, true);
+  chassis.pid_odom_set(-18_in, DRIVE_SPEED, true);
   chassis.pid_wait_quick_chain();
-
-  claw.set_value(true);
   
-  //drive to opposite goal
-  chassis.pid_odom_set(21_in, DRIVE_SPEED, true);
-  chassis.pid_wait_quick_chain();
+  //drive to opposite goal and score stack
+  chassis.pid_odom_set(18_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
 
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   chassis.pid_wait();
 
+  chassis.pid_odom_set(-27_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  //collect stack 2
+  chassis.pid_odom_set(3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(-30_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_odom_set(-18_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  //score stack 2
+  chassis.pid_odom_set(18_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
   
+  chassis.pid_odom_set(-3_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
 
 }
 
