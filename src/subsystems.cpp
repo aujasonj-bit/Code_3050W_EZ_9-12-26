@@ -9,5 +9,7 @@ pros::Motor lift2(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUni
 
 pros::ADIDigitalOut claw('A');
 
+pros::AIVision sensor_ai(123456);
+
 
 //all subsystem functions defined here (could do this in main.cpp but putting them here is better for organisation)

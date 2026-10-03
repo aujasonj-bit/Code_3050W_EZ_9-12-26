@@ -377,6 +377,18 @@ void measure_offsets() {
 // Make your own autonomous functions here!
 // . . .
 
+
+//Other Functions (eg sensing)
+
+
+
+
+
+
+
+//Auton Functions
+
+
 //Drive commands assume drivebase is 18 inches wide
 //auton reset in main.cpp places robot position in center of robot (auton code accounts for this - e.g. when driving to score in alliance goal the actual coordinates given are 9 inches away from the actual goal)
 //Auton functions currently don't have anything except drive commands
@@ -542,5 +554,5 @@ void auto_loaderside_middle() {
   
   chassis.pid_odom_set(-18_in, DRIVE_SPEED, true);
   chassis.pid_wait_quick_chain();
-  
+
   }

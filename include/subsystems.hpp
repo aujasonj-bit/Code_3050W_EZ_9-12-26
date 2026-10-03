@@ -13,5 +13,7 @@ extern pros::Motor lift2;
 
 extern pros::ADIDigitalOut claw;
 
+extern pros::AIVision sensor_ai;
+
 //prototype functions here
 void opcontrol_hdrive();
