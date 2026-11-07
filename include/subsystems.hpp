@@ -11,7 +11,8 @@ extern pros::Motor intake;
 
 extern pros::MotorGroup lift;
 
-extern pros::ADIDigitalOut claw;
+extern pros::adi::DigitalOut claw;
 
 //prototype functions here
-void opcontrol_hdrive();
+void lift_opcontrol ();
+void claw_opcontrol ();
