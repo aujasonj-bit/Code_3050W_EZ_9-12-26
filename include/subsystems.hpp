@@ -8,12 +8,10 @@ extern Drive chassis;
 // declare devices
 
 extern pros::Motor intake;
-extern pros::Motor lift1;
-extern pros::Motor lift2;
+
+extern pros::MotorGroup lift;
 
 extern pros::ADIDigitalOut claw;
-
-extern pros::AIVision sensor_ai;
 
 //prototype functions here
 void opcontrol_hdrive();
