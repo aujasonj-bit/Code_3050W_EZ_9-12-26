@@ -7,7 +7,7 @@ pros::Motor intake(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUn
 
 pros::MotorGroup lift ({21, -21});
 
-pros::adi::DigitalOut claw('A', true);
+pros::Motor claw(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnits::degrees);
 
 //all subsystem functions defined here (could do this in main.cpp but putting them here is better for organisation)
 
@@ -27,20 +27,31 @@ void lift_opcontrol (){ //opcontrol function for lift
 }
 
 void claw_opcontrol (){ //opcontrol function for claw
-    while (true){
-    
-    int claw_state = 1;
 
-        if (master.get_digital(DIGITAL_A)){
-            if (claw_state == 1){
-                claw.set_value(0);
-                claw_state = 0;
-            }
-            else {
-                claw.set_value(1);
-                claw_state = 1;
-            }
+    int claw_state = 0; //sets initial claw state to false
+    
+    while (true){
+
+        //button readings
+        if (master.get_digital(DIGITAL_R1)){
+            claw_state = 1;
+        }
+        else if (master.get_digital(DIGITAL_R2)){
+            claw_state = -1;
+        }
+        else if (master.get_digital(DIGITAL_R1) and master.get_digital(DIGITAL_R2)){
+            claw_state = 0;
+        }
+
+        //movement commands
+        if(claw_state == 1){
+            claw.move(127);
+        }
+        else if (claw_state == -1){
+            claw.move(-127);
+        }
+        else {
+            claw.move(0);
         }
     }
 }
-

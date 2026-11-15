@@ -8,9 +8,8 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-11, -3, -7},     // Left Chassis Ports (negative port will reverse it!)
-    {1, 18, 20},  // Right Chassis Ports (negative port will reverse it!)
-
+    {-11, -5},     // Left Chassis Ports (negative port will reverse it!)
+    {15, 9},  // Right Chassis Ports (negative port will reverse it!)
     14,      // IMU Port
     4.125,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
@@ -261,6 +260,8 @@ void opcontrol() {
 
     lift_opcontrol();
     claw_opcontrol();
+
+
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
 }

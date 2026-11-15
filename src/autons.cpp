@@ -394,6 +394,9 @@ void measure_offsets() {
 //Auton functions currently don't have anything except drive commands
 //Drive commands don't currently account for goal width, only robot width
 
+void auto_midfeild (){
+  
+}
 
 void auto_loaderside_backwall() {
 
