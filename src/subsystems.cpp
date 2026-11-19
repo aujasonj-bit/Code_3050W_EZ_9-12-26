@@ -13,33 +13,31 @@ pros::Motor claw(21, pros::v5::MotorCartridge::green, pros::v5::MotorEncoderUnit
 
 
 void lift_opcontrol (){ //opcontrol function for lift
-    while (true){
-        if (master.get_digital(DIGITAL_L1)){
+        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)){
             lift.move(127);
         }
-        else if (master.get_digital(DIGITAL_L2)){
+        else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)){
             lift.move(-127);
         }
         else {
             lift.move(0);
         }
-    }
+
+// pros::delay (100);
 }
 
 void claw_opcontrol (){ //opcontrol function for claw
 
     int claw_state = 0; //sets initial claw state to false
     
-    while (true){
-
         //button readings
-        if (master.get_digital(DIGITAL_R1)){
+        if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
             claw_state = 1;
         }
-        else if (master.get_digital(DIGITAL_R2)){
+        else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
             claw_state = -1;
         }
-        else if (master.get_digital(DIGITAL_R1) and master.get_digital(DIGITAL_R2)){
+        else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) and master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
             claw_state = 0;
         }
 
@@ -53,5 +51,6 @@ void claw_opcontrol (){ //opcontrol function for claw
         else {
             claw.move(0);
         }
-    }
+
+// pros::delay (100);
 }
